@@ -15,6 +15,7 @@
 
 <script type="text/jsx">
   /** @jsx React.DOM **/
+
   // Create EpisodeRow component
   var EpisodeRow = React.createClass({
     render: function () {
@@ -87,7 +88,7 @@
     }
   ];
 
-  React.renderComponent(<FilterableEpisodeTable episodes="{episodes}" />, document.getElementById('container'));
+  React.renderComponent(<FilterableEpisodeTable episodes={episodes} />, document.getElementById('container'));
 
 </script>
 
