@@ -6,12 +6,88 @@
 </head>
 <body>
 
-<div id="container"></div>
+<main class="main-content">
+  <div class="wrap" id="container"></div>
+</main>
 
 <script src="bower_components/react/react.min.js"></script>
 <script src="bower_components/react/JSXTransformer.js"></script>
 
 <script type="text/jsx">
+  /** @jsx React.DOM **/
+  // Create EpisodeRow component
+  var EpisodeRow = React.createClass({
+    render: function () {
+      return (
+        <tr>
+          <td>{this.props.episode.title}</td>
+          <td><a href="#">Show</a></td>
+        </tr>
+      );
+    }
+  });
+
+  // Episode's table
+  var EpisodeTable = React.createClass({
+    render: function () {
+      var props = this.props;
+      var rows = props.episodes.map(function (episode) {
+            return <EpisodeRow key={episode.title} episode={episode} />;
+          });
+
+      return (
+        <div className="episode-container">
+          <table className="episode-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+          </table>
+        </div>
+      );
+    }
+  });
+
+  // Search bar
+  var SearchBar = React.createClass({
+    render: function () {
+      return (
+        <section className="search-section">
+          <input type="search" className="search-episode" placeholder="Search!" />
+        </section>
+      );
+    }
+  });
+
+  var FilterableEpisodeTable = React.createClass({
+    render: function () {
+      return (
+        <div className="wtf">
+          <SearchBar />
+          <EpisodeTable episodes={this.props.episodes} />
+        </div>
+      );
+    }
+  });
+
+  var episodes = [
+    {
+      title: "Ep. 1 - Whatever",
+    },{
+      title: "Ep. 2 - What the heck?",
+    },{
+      title: "Ep. 3 - Go go go!",
+    },{
+      title: "Ep. 4 - Civil War!",
+    },{
+      title: "Ep. 5 - Tornado of souls",
+    }
+  ];
+
+  React.renderComponent(<FilterableEpisodeTable episodes="{episodes}" />, document.getElementById('container'));
 
 </script>
 
