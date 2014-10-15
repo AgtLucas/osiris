@@ -23,11 +23,19 @@
 
   // Create EpisodeRow component
   var EpisodeRow = React.createClass({
+    getInitialState: function () {
+      return {
+        viewed: false
+      };
+    },
+    handleClick: function () {
+      this.setState({viewed: true});
+    },
     render: function () {
       return (
         <tr>
           <td>{this.props.episode.title}</td>
-          <td><a href="#">Show</a></td>
+          <td><a onClick={this.handleClick}>Show {this.state.viewed ? 'Viewed' : ''}</a></td>
         </tr>
       );
     }
